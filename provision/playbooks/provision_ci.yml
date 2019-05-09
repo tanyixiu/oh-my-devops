@@ -2,5 +2,5 @@
   hosts: 172.31.27.215
   remote_user: ec2-user
   roles:
-    - { role: java }
-    - { role: jenkins }
+    - { role: ../roles/java }
+    - { role: ../roles/jenkins }
