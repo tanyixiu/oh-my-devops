@@ -1,5 +1,5 @@
 - name: "provision ci server"
-  hosts: 172.31.27.215
+  hosts: ci-server
   remote_user: ec2-user
   roles:
     - { role: ../roles/java }
