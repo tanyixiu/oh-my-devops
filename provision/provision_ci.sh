@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-ansible-playbook -i inventory/ci playbook/provision_ci.yml
+ansible-playbook -i inventory/ci playbook/provision_ci.yml -vvv
