@@ -1,5 +1,6 @@
-- name: Download Java JDK
-  get_url:
-    url: "{{ java_download_url }}"
-    headers: "Cookie:oraclelicense=accept-securebackup-cookie"
-    dest: /tmp/{{ java_archive_name }}
+- name: Download JDK
+  s3:
+    bucket: mimo.packages
+    object: /Java/jdk-8u211-linux-x64.tar.gz
+    dest: /tmp/jdk-8u211-linux-x64.tar.gz
+    mode: get
