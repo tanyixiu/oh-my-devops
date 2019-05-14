@@ -37,7 +37,7 @@
     aws_secret_key: "{{ aws_secret_key }}"
     bucket: mimo.packages
     object: "{{ jdk_s3_url }}"
-    dest: "{{ jdk_download_path }}"
+    dest: "{{ jdk_download_file }}"
     mode: get
   when:
     - java_installed_result is failed
