@@ -2,13 +2,16 @@
   yum:
     name: epel-release
     state: latest
+  become: yes
 
 - name: install pip
   yum:
     name: python-pip
     state: latest
+  become: yes
 
 - name: install boto3
   yum:
     name: boto3
     state: latest
+  become: yes
