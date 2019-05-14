@@ -17,6 +17,7 @@
     owner: "{{ provision_user }}"
     group: "{{ provision_user }}"
     mode: 0755
+    state: directory
   become: yes
   when: java_installed_result is failed
 
