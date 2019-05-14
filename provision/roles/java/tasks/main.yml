@@ -15,8 +15,7 @@
 
 - name: check jdk file is exist
   stat:
-    path: " {{ jdk_download_file }}"
-    state: file
+    path: "{{ jdk_download_file }}"
   register: jdk_file
   when: java_installed_result is failed
 
