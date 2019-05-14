@@ -1,4 +1,4 @@
 jdk_s3_url: "/Java/jdk-8u211-linux-x64.tar.gz"
 jdk_download_path: "{{ workspace }}/download/jdk"
 jdk_download_file: "{{ jdk_download_path }}/jdk-8u211-linux-x64.tar.gz"
-jdk_install_path: "{{ workspace }}/install/jdk/jdk-8u211-linux-x64"
+jdk_install_path: "{{ workspace }}/install/jdk/"
