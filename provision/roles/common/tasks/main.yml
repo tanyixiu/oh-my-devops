@@ -1,0 +1,14 @@
+- name: install epel-release
+  yum:
+    name: epel-release
+    state: latest
+
+- name: install pip
+  yum:
+    name: python-pip
+    state: latest
+
+- name: install boto3
+  yum:
+    name: boto3
+    state: latest

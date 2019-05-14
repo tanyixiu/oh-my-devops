@@ -1,6 +1,8 @@
 - name: "provision ci server"
   hosts: ci-server
   remote_user: vagrant
+  vars_files:
+    - vars/aws.yml
   roles:
     - { role: ../roles/java }
     - { role: ../roles/jenkins }
