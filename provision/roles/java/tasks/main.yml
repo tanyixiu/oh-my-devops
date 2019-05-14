@@ -1,9 +1,22 @@
-- name: Download JDK
-  aws_s3:
-    aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws_secret_key }}"
-    bucket: mimo.packages
-    object: /Java/jdk-8u211-linux-x64.tar.gz
-    dest: /tmp/jdk-8u211-linux-x64.tar.gz
-    mode: get
-    overwrite: different
+- name: check if java is installed
+  command: java -version
+  register: java_installed_result
+  ignore_errors: true
+
+- debug:
+    msg: "java is not installed"
+    when: java_installed_result is failed
+
+- debug:
+    msg: "java is installed"
+    when: java_installed_result is success
+
+#- name: Download JDK
+#  aws_s3:
+#    aws_access_key: "{{ aws_access_key }}"
+#    aws_secret_key: "{{ aws_secret_key }}"
+#    bucket: mimo.packages
+#    object: /Java/jdk-8u211-linux-x64.tar.gz
+#    dest: /tmp/jdk-8u211-linux-x64.tar.gz
+#    mode: get
+#    overwrite: different
