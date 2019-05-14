@@ -19,6 +19,7 @@ Vagrant.configure("2") do |config|
       sudo mkdir /workspace
       sudo chown vagrant /workspace
       sudo chgrp vagrant /workspace
+      git clone https://github.com/tanyixiu/oh-my-devops.git /workspace/oh-my-devops
     SHELL
   end
 
