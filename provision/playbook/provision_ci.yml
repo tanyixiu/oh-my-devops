@@ -5,4 +5,4 @@
     - ../vars/aws.yml
   roles:
     - { role: ../roles/java }
-    - { role: ../roles/jenkins }
+#    - { role: ../roles/jenkins }

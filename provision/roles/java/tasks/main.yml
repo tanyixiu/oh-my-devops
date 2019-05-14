@@ -1,6 +1,8 @@
 ---
 - name: check if java is installed
   shell: java -version
+  args:
+    executable: /bin/bash
   register: java_installed_result
   ignore_errors: true
 
