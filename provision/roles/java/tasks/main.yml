@@ -1,6 +1,6 @@
 ---
 - name: check if java is installed
-  command: "java -version"
+  shell: "java -version"
   register: java_installed_result
   ignore_errors: true
 
