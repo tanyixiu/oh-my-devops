@@ -19,14 +19,20 @@
   register: jdk_file
   when: java_installed_result is failed
 
-- name: download JDK
-  aws_s3:
-    aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws_secret_key }}"
-    bucket: mimo.packages
-    object: "{{ jdk_s3_url }}"
-    dest: "{{ jdk_download_file }}"
-    mode: get
+- debug:
+    msg: "will download jdk"
   when:
     - java_installed_result is failed
     - jdk_file.stat.exists == false
+
+#- name: download JDK
+#  aws_s3:
+#    aws_access_key: "{{ aws_access_key }}"
+#    aws_secret_key: "{{ aws_secret_key }}"
+#    bucket: mimo.packages
+#    object: "{{ jdk_s3_url }}"
+#    dest: "{{ jdk_download_file }}"
+#    mode: get
+#  when:
+#    - java_installed_result is failed
+#    - jdk_file.stat.exists == false
