@@ -11,12 +11,29 @@
     msg: "java is installed"
   when: java_installed_result is success
 
-#- name: Download JDK
-#  aws_s3:
-#    aws_access_key: "{{ aws_access_key }}"
-#    aws_secret_key: "{{ aws_secret_key }}"
-#    bucket: mimo.packages
-#    object: /Java/jdk-8u211-linux-x64.tar.gz
-#    dest: /tmp/jdk-8u211-linux-x64.tar.gz
-#    mode: get
-#    overwrite: different
+- name: ensure jdk download path is exist
+  file:
+    path: "{{ jdk_download_path }}"
+    owner: "{{ provision_user }}"
+    group: "{{ provision_user }}"
+    mode: 0755
+  become: yes
+  when: java_installed_result is failed
+
+- name: check jdk file is exist
+  stat:
+    path: " {{ jdk_download_file }}"
+  register: jdk_file
+  when: java_installed_result is failed
+
+- name: download JDK
+  aws_s3:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    bucket: mimo.packages
+    object: "{{ jdk_s3_url }}"
+    dest: "{{ jdk_download_path }}"
+    mode: get
+  when:
+    - java_installed_result is failed
+    - jdk_file.stat.exists is False

@@ -15,3 +15,11 @@
     name: boto3
     state: latest
   become: yes
+
+- name: create workspace directory
+  file:
+    path: "{{ workspace }}"
+    owner: "{{ provision_user }}"
+    group: "{{ provision_user }}"
+    mode: 0755
+  become: yes
