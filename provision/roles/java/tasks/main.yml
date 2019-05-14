@@ -31,14 +31,14 @@
     msg: "{{ jdk_file.stat.exists }}"
 
 
-#- name: download JDK
-#  aws_s3:
-#    aws_access_key: "{{ aws_access_key }}"
-#    aws_secret_key: "{{ aws_secret_key }}"
-#    bucket: mimo.packages
-#    object: "{{ jdk_s3_url }}"
-#    dest: "{{ jdk_download_path }}"
-#    mode: get
-#  when:
-#    - java_installed_result is failed
-#    - jdk_file.stat.exists is False
+- name: download JDK
+  aws_s3:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    bucket: mimo.packages
+    object: "{{ jdk_s3_url }}"
+    dest: "{{ jdk_download_path }}"
+    mode: get
+  when:
+    - java_installed_result is failed
+    - jdk_file.stat.exists is false
