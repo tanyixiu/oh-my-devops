@@ -1,0 +1,15 @@
+---
+- name: ensure jdk install path is exist
+  file:
+    path: "{{ jdk_install_path }}"
+    owner: "{{ provision_user }}"
+    group: "{{ provision_user }}"
+    mode: 0755
+    state: directory
+  become: yes
+
+- name: extract jdk file
+  unarchive:
+    src: "{{ jdk_download_file }}"
+    dest: "{{ jdk_install_path }}"
+    remote_src: yes

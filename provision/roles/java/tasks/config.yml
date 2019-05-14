@@ -1,0 +1,25 @@
+---
+- name: ensure config path is exist
+  file:
+    path: "{{ config_path }}"
+    owner: "{{ provision_user }}"
+    group: "{{ provision_user }}"
+    mode: 0755
+    state: directory
+  become: yes
+
+- name: copy profile
+  template:
+    src: profile_config.j2
+    dest: "{{ config_path }}/profile_config"
+    owner: "{{ provision_user }}"
+    group: "{{ provision_user }}"
+
+- name: config java home
+  lineinfile:
+    dest: /etc/profile
+    line: "source {{ config_path }}/profile_config"
+    state: present
+    insertafter: EOF
+    create: true
+  become: yes

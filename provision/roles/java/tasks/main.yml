@@ -1,77 +1,14 @@
+---
 - name: check if java is installed
   command: java -version
   register: java_installed_result
   ignore_errors: true
 
-- name: ensure jdk download path is exist
-  file:
-    path: "{{ jdk_download_path }}"
-    owner: "{{ provision_user }}"
-    group: "{{ provision_user }}"
-    mode: 0755
-    state: directory
-  become: yes
+- include: download.yml
   when: java_installed_result is failed
 
-- name: check jdk file is exist
-  stat:
-    path: "{{ jdk_download_file }}"
-  register: jdk_file
+- include: install.yml
   when: java_installed_result is failed
 
-- name: download JDK
-  aws_s3:
-    aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws_secret_key }}"
-    bucket: mimo.packages
-    object: "{{ jdk_s3_url }}"
-    dest: "{{ jdk_download_file }}"
-    mode: get
-  when:
-    - java_installed_result is failed
-    - jdk_file.stat.exists == false
-
-- name: ensure jdk install path is exist
-  file:
-    path: "{{ jdk_install_path }}"
-    owner: "{{ provision_user }}"
-    group: "{{ provision_user }}"
-    mode: 0755
-    state: directory
-  become: yes
-  when: java_installed_result is failed
-
-#- name: extract jdk file
-#  unarchive:
-#    src: "{{ jdk_download_file }}"
-#    dest: "{{ jdk_install_path }}"
-#    remote_src: yes
-#  when: java_installed_result is failed
-
-- name: ensure config path is exist
-  file:
-    path: "{{ config_path }}"
-    owner: "{{ provision_user }}"
-    group: "{{ provision_user }}"
-    mode: 0755
-    state: directory
-  become: yes
-  when: java_installed_result is failed
-
-- name: copy profile
-  template:
-    src: profile_config.j2
-    dest: "{{ config_path }}/profile_config"
-    owner: "{{ provision_user }}"
-    group: "{{ provision_user }}"
-  when: java_installed_result is failed
-
-- name: config java home
-  lineinfile:
-    dest: /etc/profile
-    line: "source {{ config_path }}/profile_config"
-    state: present
-    insertafter: EOF
-    create: true
-  become: yes
+- include: config.yml
   when: java_installed_result is failed

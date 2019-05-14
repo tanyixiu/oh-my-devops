@@ -1,0 +1,25 @@
+---
+- name: ensure jdk download path is exist
+  file:
+    path: "{{ jdk_download_path }}"
+    owner: "{{ provision_user }}"
+    group: "{{ provision_user }}"
+    mode: 0755
+    state: directory
+  become: yes
+
+- name: check jdk file is exist
+  stat:
+    path: "{{ jdk_download_file }}"
+  register: jdk_file
+
+- name: download JDK file
+  aws_s3:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    bucket: mimo.packages
+    object: "{{ jdk_s3_url }}"
+    dest: "{{ jdk_download_file }}"
+    mode: get
+  when:
+    - jdk_file.stat.exists == false
