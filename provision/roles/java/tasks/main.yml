@@ -1,10 +1,9 @@
 ---
 - name: check if java is installed
   shell: java -version
-  args:
-    executable: /bin/bash
   register: java_installed_result
   ignore_errors: true
+  become: yes
 
 #- include: download.yml
 #  when: java_installed_result is failed
