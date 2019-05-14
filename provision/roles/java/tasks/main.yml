@@ -45,4 +45,5 @@
   unarchive:
     src: "{{ jdk_download_file }}"
     dest: "{{ jdk_install_path }}"
+    remote_src: yes
   when: java_installed_result is failed
