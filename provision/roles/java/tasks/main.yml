@@ -41,4 +41,4 @@
     mode: get
   when:
     - java_installed_result is failed
-    - jdk_file.stat.exists is false
+    - jdk_file.stat.exists == false
