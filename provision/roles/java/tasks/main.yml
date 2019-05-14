@@ -66,11 +66,12 @@
     group: "{{ provision_user }}"
   when: java_installed_result is failed
 
-#- name:
-#  lineinfile:
-#    dest: "/workspace/test.txt"
-#    line:
-#    state: present
-#    insertafter: EOF
-#    create: true
-#  become: yes
+- name: config java home
+  lineinfile:
+    dest: /etc/profile
+    line: "source {{ config_path }}/profile_config"
+    state: present
+    insertafter: EOF
+    create: true
+  become: yes
+  when: java_installed_result is failed
