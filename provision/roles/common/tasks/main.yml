@@ -11,7 +11,7 @@
   become: yes
 
 - name: install boto3
-  yum:
+  pip:
     name: boto3
     state: latest
   become: yes
