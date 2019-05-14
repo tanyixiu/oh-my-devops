@@ -1,6 +1,6 @@
 - name: "provision ci server"
   hosts: ci-server
-  remote_user: ec2-user
+  remote_user: vagrant
   roles:
     - { role: ../roles/java }
     - { role: ../roles/jenkins }
