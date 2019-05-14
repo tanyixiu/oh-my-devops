@@ -1,5 +1,7 @@
 - name: Download JDK
   aws_s3:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
     bucket: mimo.packages
     object: /Java/jdk-8u211-linux-x64.tar.gz
     dest: /tmp/jdk-8u211-linux-x64.tar.gz
