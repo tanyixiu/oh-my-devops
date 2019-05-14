@@ -5,11 +5,11 @@
 
 - debug:
     msg: "java is not installed"
-    when: java_installed_result is failed
+  when: java_installed_result is failed
 
 - debug:
     msg: "java is installed"
-    when: java_installed_result is success
+  when: java_installed_result is success
 
 #- name: Download JDK
 #  aws_s3:
