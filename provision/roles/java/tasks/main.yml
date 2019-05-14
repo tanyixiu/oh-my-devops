@@ -3,13 +3,12 @@
   shell: java -version
   register: java_installed_result
   ignore_errors: true
-  become: yes
 
 #- include: download.yml
 #  when: java_installed_result is failed
 #
 #- include: install.yml
 #  when: java_installed_result is failed
-#
-#- include: config.yml
-#  when: java_installed_result is failed
+
+- include: config.yml
+  when: java_installed_result is failed

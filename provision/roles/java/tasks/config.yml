@@ -23,3 +23,11 @@
     insertafter: EOF
     create: true
   become: yes
+
+- name: set java link
+  file:
+    src: "{{ java_home_dir }}/bin/java"
+    dest: "/usr/bin/java"
+    mode: 0755
+    state: link
+  become: yes
