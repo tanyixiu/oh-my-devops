@@ -6,12 +6,12 @@ ENV["LC_ALL"] = "en_US.UTF-8"
 Vagrant.configure("2") do |config|
 
   config.vm.define "docker" do |docker|
-    docker.vm.box = "ubuntu/trusty64"
+    docker.vm.box = "centos/7"
     docker.vm.hostname = "docker-server"
     docker.vm.network "private_network", ip: "192.168.33.9"
     docker.vm.provision "shell", inline: <<-SHELL
-      sudo apt-get install docker -y
-      sudo apt-get install git -y
+      sudo yum install docker -y
+      sudo yum install git -y
       sudo rm -rf /workspace
       git clone https://github.com/tanyixiu/oh-my-devops.git /workspace/oh-my-devops
       sudo chown -R vagrant:vagrant /workspace
