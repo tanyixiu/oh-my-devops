@@ -14,7 +14,13 @@ Vagrant.configure("2") do |config|
       sudo systemctl start docker.service
       sudo chmod 666 /var/run/docker.sock
       docker version
+      sudo yum install epel-release -y
+      sudo yum install python-pip -y
+      sudo pip install --upgrade pip
+      sudo pip install docker-compose
       sudo yum install git -y
+
+
       sudo rm -rf /workspace
       git clone https://github.com/tanyixiu/oh-my-devops.git /workspace/oh-my-devops
       sudo chown -R vagrant:vagrant /workspace
