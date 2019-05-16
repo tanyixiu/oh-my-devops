@@ -1,4 +1,7 @@
 version: "3"
+volumes:
+  jenkins-data:
+    driver: local
 services:
   ci:
     image: jenkinsci/blueocean
