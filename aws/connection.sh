@@ -42,4 +42,4 @@ function ssh_aws_ci_server {
   ssh_into_aws_instance CI-Server
 }
 
-ssh_aws_ci_server
+alias aws.ci=ssh_aws_ci_server
