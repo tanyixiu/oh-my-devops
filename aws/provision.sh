@@ -16,13 +16,31 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 mkdir ~/programs/
 tar -zxvf ~/jdk-8u221-linux-x64.tar.gz ~/programs/
-sudo echo "export JAVA_HOME=\"/home/ec2-user/programs/jdk1.8.0_221\"">>/etc/profile
+sudo ln -s /programs/jdk1.8.0_221/bin/java /usr/bin/java
+
+sudo mkdir /programs
+sudo cp -r /home/ec2-user/programs/jdk1.8.0_221 /programs/
+sudo echo "export JAVA_HOME=\"/programs/jdk1.8.0_221\"">>/etc/profile
 sudo echo "export PATH=\$JAVA_HOME/bin:\$PATH">>/etc/profile
 
+
 # sudo vim /etc/profile
-# export JAVA_HOME="/home/ec2-user/programs/jdk1.8.0_221"
+# export JAVA_HOME="/programs/jdk1.8.0_221"
 # export PATH=$JAVA_HOME/bin:$PATH
 
-mkdir ~/programs/jenkins
-docker pull jenkins/jenkins
-docker run -d -p 8000:8080 -v ~/programs/jenkins:/var/jenkins_home:z -t jenkins/jenkins
+#mkdir ~/programs/jenkins
+#docker pull jenkins/jenkins
+#docker run -d -p 8000:8080 -v ~/programs/jenkins:/var/jenkins_home:z -t jenkins/jenkins
+
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins.io/redhat/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
+sudo yum install jenkins -y
+sudo usermod -a -G jenkins ec2-user
+#sudo usermod -a -G ec2-user jenkins
+sudo usermod -a -G docker jenkins
+#sudo vim /etc/sysconfig/jenkins
+# JENKINS_USER="ec2-user"
+# JENKINS_PORT="8888"
+sudo service jenkins start
+sudo service jenkins status
