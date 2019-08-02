@@ -29,25 +29,27 @@ function ssh_aws_ci_server {
   ssh_into_aws_instance CI-Server
 }
 
-param=$1
+function aws_ci {
+  param=$1
 
-case "${param}" in
-  "status")
-    get_ci_server_status
-    ;;
-  "start")
-    start_aws_ci_server
-    ;;
-  "stop")
-    stop_aws_ci_server
-    ;;
-  "ssh")
-    ssh_aws_ci_server
-    ;;
-  "ip")
-    get_ci_server_ip
-    ;;
-esac
+  case "${param}" in
+    "status")
+      get_ci_server_status
+      ;;
+    "start")
+      start_aws_ci_server
+      ;;
+    "stop")
+      stop_aws_ci_server
+      ;;
+    "ssh")
+      ssh_aws_ci_server
+      ;;
+    "ip")
+      get_ci_server_ip
+      ;;
+  esac
+}
 
 alias aws.ci.status=get_ci_server_status
 alias aws.ci.start=start_aws_ci_server
