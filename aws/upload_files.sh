@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-source ./connection.sh
+current_script_dir="$( cd "$(dirname "$0")" ; pwd -P )"
+
+source ${current_script_dir}/connection.sh
 
 function upload_file_to_aws_instance {
   instance_name=$1

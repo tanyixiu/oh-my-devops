@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-source ./connection.sh
+current_script_dir="$( cd "$(dirname "$0")" ; pwd -P )"
+
+source ${current_script_dir}/connection.sh
 
 function get_ci_server_ip {
   echo "Getting AWS instance CI-Server IP ......"
