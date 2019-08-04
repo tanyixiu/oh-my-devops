@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+function get_aws_instance_infos_by_name {
+  local instance_name=$1
+
+  local aws_instance_infos=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=${instance_name}")
+
+  echo ${aws_instance_infos}
+}
+
 function get_aws_instance_info_by_name {
   local instance_name=$1
 
@@ -62,6 +70,16 @@ function stop_aws_instance_by_name {
   local instance_name=$1
   local instance_id=$(get_aws_instance_id_by_name ${instance_name})
   aws ec2 stop-instances --instance-ids ${instance_id}
+}
+
+function create_aws_instance_by_name {
+  local instance_name=$1
+  aws ec2 run-instances \
+          --image-id ami-01f7527546b557442 \
+          --instance-type t2.micro \
+          --key-name yixiu-aws-key \
+          --security-groups default \
+          --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${instance_name}}]"
 }
 
 
