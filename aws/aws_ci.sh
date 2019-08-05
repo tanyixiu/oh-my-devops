@@ -74,10 +74,6 @@ function my_aws {
   esac
 }
 
-#function stop_all_aws_instances{
-#
-#}
-
 AWS_CI_INSTANCE_NAME="CI-Server"
 
 alias aws.ci.create="my_aws create ${AWS_CI_INSTANCE_NAME}"
