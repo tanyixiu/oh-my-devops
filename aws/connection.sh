@@ -82,4 +82,8 @@ function create_aws_instance_by_name {
           --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${instance_name}}]"
 }
 
+function stop_all_aws_instances {
+  aws ec2 stop-instances --instance-ids $(aws ec2 describe-instances --filters  "Name=instance-state-name,Values=pending,running" --query "Reservations[].Instances[].[InstanceId]" --output text)
+}
+
 

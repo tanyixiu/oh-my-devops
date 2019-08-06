@@ -40,5 +40,17 @@ sudo sed -i 's/JENKINS_PORT\=\"8080\"/JENKINS_PORT\=\"8888\"/' /etc/sysconfig/je
 sudo cat /etc/sysconfig/jenkins | grep JENKINS_PORT
 sudo service jenkins start
 sudo service jenkins status
-
+sudo -u jenkins ssh-keygen
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+
+############################################################
+# Install Ansible
+sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum install ansible -y
+
+
+###
+#sudo vim /etc/environment
+echo "LANG=en_US.utf-8" | sudo tee -a /etc/environment && echo "LC_ALL=en_US.utf-8" | sudo tee -a /etc/environment
+

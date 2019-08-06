@@ -74,6 +74,8 @@ function my_aws {
   esac
 }
 
+
+
 AWS_CI_INSTANCE_NAME="CI-Server"
 
 alias aws.ci.create="my_aws create ${AWS_CI_INSTANCE_NAME}"
@@ -95,4 +97,11 @@ alias aws.spring.info="my_aws info ${AWS_SPRING_SERVER}"
 alias aws.spring.ssh="my_aws ssh ${AWS_SPRING_SERVER}"
 alias aws.spring.ip="my_aws ip ${AWS_SPRING_SERVER}"
 
-alias aws.stop.all=""
+
+function start_all_aws_instances {
+  aws.ci.start
+  aws.spring.start
+}
+
+alias aws.stop.all="stop_all_aws_instances"
+alias aws.start.all="start_all_aws_instances"
